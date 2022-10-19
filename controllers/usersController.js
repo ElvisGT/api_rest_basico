@@ -71,10 +71,13 @@ const usersDelete = async( req = request, res = response ) => {
   //Esta forma de eliminar fisicamente no se recomienda
   // await Usuario.findByIdAndDelete(id);
 
-  await Usuario.findByIdAndUpdate(id,{state:false})
+  const usuario = await Usuario.findByIdAndUpdate(id,{state:false});
+
+  const userAuth = req.userAuth;
 
   res.json({
-    msg:`Usuario con id ${id} eliminado`
+    usuario,
+    userAuth
   });
 }
 

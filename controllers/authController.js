@@ -2,6 +2,7 @@ const {request,response} = require("express");
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const Usuario = require("../models/usuario");
+const {generateJWT} = require("../helpers/generate-jwt");
 
 
 const login = async(req = request, res = response) => {
@@ -31,10 +32,13 @@ const login = async(req = request, res = response) => {
       msg:'El password no es correcto'
     })
   }
+
+  //Generar token
+  const token = await generateJWT( usuario._id );
   
    res.json({
-    email,
-    password
+    usuario,
+    token
   })
 
  

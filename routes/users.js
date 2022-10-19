@@ -1,5 +1,8 @@
 const { Router } = require("express");
 
+const { validateJWT } = require("../middlewares/validate-jwt");
+
+
 const {
   usersGet,
   usersPost,
@@ -16,7 +19,11 @@ router.post("/",usersPost)
 
 router.put("/:id",usersPut)
 
-router.delete("/:id",usersDelete)
+router.delete("/:id",[
+  validateJWT,
+
+],
+usersDelete)
 
 router.get("*",usersNotFound)
 
