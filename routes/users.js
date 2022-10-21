@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
-const { validateJWT } = require("../middlewares/validate-jwt");
+const { validateRole,
+        validateJWT } = require("../middlewares/");
 
 
 const {
@@ -21,6 +22,7 @@ router.put("/:id",usersPut)
 
 router.delete("/:id",[
   validateJWT,
+  validateRole,
 
 ],
 usersDelete)

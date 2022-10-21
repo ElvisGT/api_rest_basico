@@ -2,8 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const users = require("../routes/users");
-const auth = require("../routes/auth");
+const { auth, categories, users} = require("../routes");
 const { dbConnection } = require("../database/config");
 
 
@@ -11,9 +10,12 @@ class Server {
   constructor(){
     this.app = express();
     this.port = process.env.PORT;
-    this.usersPath = '/api/usuarios';
-    this.authPath = '/api/auth';
-
+    this.paths = {
+      users:'/api/usuarios',
+      auth:'/api/auth',
+      categories:'/api/categorias',
+    }
+   
 
     //Conexion con base de datos
     this.connectDB();
@@ -40,9 +42,10 @@ class Server {
   }
 
   routes(){
-   this.app.use( this.usersPath,users );
-   this.app.use( this.authPath,auth );
-
+    this.app.use( this.paths.users,users );
+    this.app.use( this.paths.auth,auth );
+    this.app.use( this.paths.categories,categories);
+    
   }
 
   listen(){
