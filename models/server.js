@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const { auth, categories, users} = require("../routes");
+const { auth, categories, users,products,search} = require("../routes");
 const { dbConnection } = require("../database/config");
 
 
@@ -14,6 +14,8 @@ class Server {
       users:'/api/usuarios',
       auth:'/api/auth',
       categories:'/api/categorias',
+      products:'/api/productos',
+      search:"/api/buscar"
     }
    
 
@@ -42,9 +44,13 @@ class Server {
   }
 
   routes(){
-    this.app.use( this.paths.users,users );
     this.app.use( this.paths.auth,auth );
+    this.app.use( this.paths.search,search);
     this.app.use( this.paths.categories,categories);
+    this.app.use( this.paths.products,products);
+    this.app.use( this.paths.users,users );
+
+
     
   }
 

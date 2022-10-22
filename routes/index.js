@@ -1,10 +1,14 @@
 
-const users = require("../routes/users");
-const auth = require("../routes/auth");
-const categories = require("../routes/categories");
+const auth = require("./auth");
+const search = require("./search")
+const categories = require("./categories");
+const products = require("./products");
+const users = require("./users");
 
 module.exports = {
-  users,
   auth,
-  categories
+  categories,
+  products,
+  search,
+  users,
 }

@@ -1,6 +1,5 @@
 const {request,response} = require("express");
 const bcryptjs = require("bcryptjs");
-const { validationResult } = require("express-validator");
 const {Usuario} = require("../models");
 const {generateJWT} = require("../helpers/generate-jwt");
 
