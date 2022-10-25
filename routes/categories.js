@@ -10,7 +10,7 @@ const { validateJWT,
         validateCampos, 
         validateRole} = require("../middlewares/");
 
-const  {isExists}  = require("../helpers/verify-categoria");
+const  {isExists}  = require("../helpers");
 
 const router = Router();
 

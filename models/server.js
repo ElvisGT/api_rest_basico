@@ -1,8 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
-const { auth, categories, users,products,search} = require("../routes");
+const { auth, 
+  categories, 
+  products,
+  search,
+  uploads,
+  users} = require("../routes");
 const { dbConnection } = require("../database/config");
 
 
@@ -15,7 +21,8 @@ class Server {
       auth:'/api/auth',
       categories:'/api/categorias',
       products:'/api/productos',
-      search:"/api/buscar"
+      search:"/api/buscar",
+      uploads:"/api/uploads"
     }
    
 
@@ -41,6 +48,13 @@ class Server {
 
     //Uso de cors
     this.app.use( cors() );
+
+    //Carga de archivos
+    this.app.use(fileUpload({
+      useTempFiles : true,
+      tempFileDir : '/tmp/',
+      createParentPath:true,
+  }));
   }
 
   routes(){
@@ -49,9 +63,7 @@ class Server {
     this.app.use( this.paths.categories,categories);
     this.app.use( this.paths.products,products);
     this.app.use( this.paths.users,users );
-
-
-    
+    this.app.use( this.paths.uploads,uploads );
   }
 
   listen(){

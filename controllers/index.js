@@ -1,10 +1,11 @@
 
 
-const categories = require("../controllers/categories");
-const login = require("../controllers/authController");
-const products = require("../controllers/products");
-const search = require("../controllers/search");
-const users = require("../controllers/usersController");
+const categories = require("./categories");
+const login = require("./authController");
+const products = require("./products");
+const search = require("./search");
+const uploads = require("./uploads");
+const users = require("./usersController");
 
 
 module.exports = {
@@ -12,5 +13,6 @@ module.exports = {
   ...login,
   ...products,
   ...search,
+  ...uploads,
   ...users,
 }

@@ -14,6 +14,10 @@ const searchID = async(termino,model) => {
 
       case 'Product':
         value = await Product.findById(termino);
+
+        if(!value) {
+          value = await Product.find({category:termino}).populate("category","name");
+        }
       break;
 
       case 'Usuario':

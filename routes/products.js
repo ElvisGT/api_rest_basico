@@ -8,7 +8,7 @@ const {getProducts,
       updateProduct,
       deleteProduct,
 } = require("../controllers");
-const { isProductExists } = require("../helpers/verify-product");
+const { isProductExists } = require("../helpers");
 const { validateJWT, validateCampos, validateRole } = require("../middlewares");
 
 //Obtener productos

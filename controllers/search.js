@@ -1,6 +1,5 @@
-const { isValidObjectId } = require("mongoose");
 const {Usuario, Product, Categoria} = require("../models");
-const {searchID} = require("../helpers/search-ID");
+const {searchID} = require("../helpers");
 
 const collectionsAllowed = [
   'usuarios',
@@ -43,9 +42,13 @@ const searchProducts = async(termino,res) => {
 
   const regex = new RegExp(termino,'i');
 
+  const data = {
+    "name":regex
+  }
+
   const allProducts = await Product.find({
-    $and:[{name:regex},{state:true}]
-  })
+    $and:[{state:true},{name:regex}]
+  }).populate("category","name")
 
   res.json({
     results:allProducts
