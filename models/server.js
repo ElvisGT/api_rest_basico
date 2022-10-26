@@ -10,6 +10,7 @@ const { auth,
   uploads,
   users} = require("../routes");
 const { dbConnection } = require("../database/config");
+const { validateFile } = require("../middlewares");
 
 
 class Server {
@@ -55,6 +56,7 @@ class Server {
       tempFileDir : '/tmp/',
       createParentPath:true,
   }));
+
   }
 
   routes(){
